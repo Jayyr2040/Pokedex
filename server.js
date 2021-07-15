@@ -17,7 +17,7 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT;
 const methodOverride = require("method-override");
-const pokedex = require("./models/pokemon");
+const Pokemon = require("./models/pokemon");
 
 app.use(express.urlencoded({ extended: false })); 
 app.use(express.static('public'));
@@ -25,7 +25,8 @@ app.use(methodOverride("_method"));
 
 
 app.get("/pokemon", (req, res) => {
-    res.send("Pokdex route working!");
+  //   res.send("Pokdex route working!");
+  res.render("index.ejs", {data : Pokemon});
   });
 
   
