@@ -19,17 +19,30 @@ const PORT = process.env.PORT;
 const methodOverride = require("method-override");
 const Pokemon = require("./models/pokemon");
 
-app.use(express.urlencoded({ extended: false })); 
+app.use(express.urlencoded({ extended: true })); 
 app.use(express.static('public'));
 app.use(methodOverride("_method"));
 
-
+// Index route
 app.get("/pokemon", (req, res) => {
   //   res.send("Pokdex route working!");
   res.render("index.ejs", {data : Pokemon});
   });
 
- 
+// New route => to form
+app.get("/pokemon/new", (req, res) => {
+    res.render("new.ejs");
+  });
+
+// Post => create a new fruit
+app.post("/pokemon", (req, res) => {
+    req.body.type = req.body.type.split(',');
+    console.log(req.body);
+    Pokemon.push(req.body);
+    res.redirect("/pokemon");
+  });
+  
+//Show route
 app.get("/pokemon/:id", (req, res) => {
     const pos = req.params.id;
     res.render("show.ejs", { data : Pokemon[pos] });

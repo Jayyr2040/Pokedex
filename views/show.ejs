@@ -31,25 +31,6 @@
             <%} 
             %>
         </ul> 
-        Abilities:
-        <ul><% for (const key in data.misc.abilities)
-            {%>
-                <%=key%>: 
-                <% data.misc.abilities[key].map((item) => 
-                {%> <li><%=item%> </li>
-                <%} 
-                )
-                %>
-            <%} 
-            %>
-        </ul> 
-        Damages:
-        <ul><% for (const key in data.damages)
-            {%>
-                <li><%=key%>: <%= data.damages[key] %></li>
-            <%} 
-            %>
-        </ul> 
     </p>
   </body>
 </html>

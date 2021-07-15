@@ -7,11 +7,11 @@
 <body>
     <div class="container">
         <h1>Pokedex</h1>
-        <button><a href='http://localhost:3000/pokemon/new'>NEW ITEM</a></button>
+        <button><a href='/pokemon/new'>NEW ITEM</a></button>
         <br>
-                <% for (let i = 0; i < 20; i++) 
+                <% for (let i = (data.length - 10); i < data.length; i++) 
                     {%>
-                        <a href='http://localhost:3000/pokemon/<%= i%>'><%= data[i].name %></a>
+                        <a href='/pokemon/<%= i%>'><%= data[i].name %></a>
                             <img src='<%= data[i].img %>' alt =''>
                          
                     <%} 
