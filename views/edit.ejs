@@ -13,7 +13,14 @@
         <input type="text" name="img" id="img" value="<%=data.img%>"/>
         <label for="type">Type</label>
         <input type="text" name="type" id="type" value="<%=data.type%>"/>
+        <label for="norm_abilities">Normal Abilities</label>
+        <input type="text" name="norm_abilities" id="norm_abilities" value="<%=data.misc.abilities.normal%>" />
+        <label for="hidden_abilities">Hidden Abilities</label>
+        <input type="text" name="hidden_abilities" id="hidden_abilities" value="<%=data.misc.abilities.hidden%>" />
         <input type="submit" value="Edit Pokemon" />
       </form>
+      <button><a href='/pokemon'>Back to Menu</a></button>
+      <button><a href='/pokemon/<%=pos%>'>Back to Pokemon</a></button>
+
 </body>
 </html>

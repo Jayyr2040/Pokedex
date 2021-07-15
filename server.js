@@ -25,7 +25,6 @@ app.use(methodOverride("_method"));
 
 // Index route
 app.get("/pokemon", (req, res) => {
-  //   res.send("Pokdex route working!");
   res.render("index.ejs", {data : Pokemon});
   });
 
@@ -34,11 +33,18 @@ app.get("/pokemon/new", (req, res) => {
     res.render("new.ejs");
   });
 
-// Post => create a new fruit
+// Post => create a new pokemon
 app.post("/pokemon", (req, res) => {
+    const newPokemon = {name:"",img:"",type:[], misc : { abilities : { normal : [], hidden : []}}}
     req.body.type = req.body.type.split(',');
-    console.log(req.body);
-    Pokemon.push(req.body);
+    req.body.norm_abilities = req.body.norm_abilities.split(',');
+    req.body.hidden_abilities = req.body.hidden_abilities.split(',');
+    newPokemon.name = req.body.name;
+    newPokemon.img = req.body.img;
+    newPokemon.type = [...req.body.type];
+    newPokemon.misc.abilities.normal = [...req.body.norm_abilities];
+    newPokemon.misc.abilities.hidden = [...req.body.hidden_abilities];
+    Pokemon.push(newPokemon);
     res.redirect("/pokemon");
   });
   
@@ -51,18 +57,22 @@ app.get("/pokemon/:id", (req, res) => {
 // Update 
 app.put('/pokemon/:id', (req, res) => {
     const {id}  = req.params; // another to pluck params 
-   Pokemon[id].name = req.body.name;
-   Pokemon[id].img = req.body.img;
-   req.body.type = req.body.type.split(',');
-   Pokemon[id].type = req.body.type ;
-   res.redirect("/pokemon");
+    req.body.type = req.body.type.split(',');
+    req.body.norm_abilities = req.body.norm_abilities.split(',');
+    req.body.hidden_abilities = req.body.hidden_abilities.split(',');
+    Pokemon[id].name = req.body.name;
+    Pokemon[id].img = req.body.img;
+    Pokemon[id].type = req.body.type ;
+    Pokemon[id].misc.abilities.normal = [...req.body.norm_abilities] ;
+    Pokemon[id].misc.abilities.hidden = [...req.body.hidden_abilities] ;
+    res.redirect("/pokemon");
    });
 
 // *show edit form route => show edit form
 app.get('/pokemon/:id/edit', (req, res) => {
-   const pos = req.params.id;
-   const pokemon = Pokemon[pos];
-   res.render("edit.ejs", { data : pokemon, pos: pos });
+    const pos = req.params.id;
+    const pokemon = Pokemon[pos];
+    res.render("edit.ejs", { data : pokemon, pos: pos });
    });
 
 
