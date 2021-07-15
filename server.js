@@ -45,8 +45,26 @@ app.post("/pokemon", (req, res) => {
 //Show route
 app.get("/pokemon/:id", (req, res) => {
     const pos = req.params.id;
-    res.render("show.ejs", { data : Pokemon[pos] });
+    res.render("show.ejs", { data : Pokemon[pos], pos : pos });
   });
+
+// Update 
+app.put('/pokemon/:id', (req, res) => {
+    const {id}  = req.params; // another to pluck params 
+   Pokemon[id].name = req.body.name;
+   Pokemon[id].img = req.body.img;
+   req.body.type = req.body.type.split(',');
+   Pokemon[id].type = req.body.type ;
+   res.redirect("/pokemon");
+   });
+
+// *show edit form route => show edit form
+app.get('/pokemon/:id/edit', (req, res) => {
+   const pos = req.params.id;
+   const pokemon = Pokemon[pos];
+   res.render("edit.ejs", { data : pokemon, pos: pos });
+   });
+  
 
 app.listen(PORT, () => {
     console.log("Pokedex Up and Running on port: ", PORT);
