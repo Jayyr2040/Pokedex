@@ -29,7 +29,12 @@ app.get("/pokemon", (req, res) => {
   res.render("index.ejs", {data : Pokemon});
   });
 
-  
+ 
+app.get("/pokemon/:id", (req, res) => {
+    const pos = req.params.id;
+    res.render("show.ejs", { data : Pokemon[pos] });
+  });
+
 app.listen(PORT, () => {
     console.log("Pokedex Up and Running on port: ", PORT);
   });
