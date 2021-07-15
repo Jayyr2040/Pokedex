@@ -6,13 +6,17 @@
   </head>
   <body>
     <h1><%= data.name %></h1>
-    <a href='/pokemon/<%=pos%>/edit'>Edit</a>
+    <button><a href='/pokemon/<%=pos%>/edit'>Edit</a></button>
+    <form action='/pokemon/<%=pos%>?_method=DELETE' method='POST'>
+        <button>Delete</button>
+    </form>
     <br>
     <br>
     <p>
       <img src='<%= data.img%>' alt ="">
       <br>
       <button><a href='http://localhost:3000/pokemon/'>Back to Menu</a></button>
+     
       <br>
       Type:
       <ul><% data.type.map((item)=>

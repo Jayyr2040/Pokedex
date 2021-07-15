@@ -64,6 +64,13 @@ app.get('/pokemon/:id/edit', (req, res) => {
    const pokemon = Pokemon[pos];
    res.render("edit.ejs", { data : pokemon, pos: pos });
    });
+
+
+// *delete route => delete 1 pokemon
+app.delete('/pokemon/:id', (req, res) => {
+    Pokemon.splice(req.params.id, 1); //remove the item from the array
+    res.redirect('/pokemon');  //redirect back to index route
+   });
   
 
 app.listen(PORT, () => {
